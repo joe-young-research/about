@@ -38,9 +38,6 @@ body {
   z-index: 9999; 
 }
 
-
-
-
 .top-nav a {
   font-family: Georgia, serif;
   font-size: 1.25rem;
@@ -93,9 +90,10 @@ body {
       
       img{
           border-radius:50%;
-          width: 60%;
+          width: 90%;
           max-width:150px
       }
+
     .center-container {
       display: flex;
       flex-direction: column; 
@@ -116,9 +114,10 @@ body {
       background-color: #F2F0EF;
       border-radius:.25rem;
       }
-.indentText{
+    
+    .indentText{
     text-align: justify; margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
-}
+    }
     a{
         color:#aaaaaa;
         text-decoration:underline;
@@ -152,11 +151,14 @@ body {
      td:last-of-type {
         border: none;
     }
+
+.card{width: 25%; text-align: right; align-self: center; vertical-align: center;padding-top: 4rem}
+.subcard td{display: block;text-align: right;padding:0}
       
       /* ===========================
    MOBILE RESPONSIVENESS
    =========================== */
-@media (max-width: 768px) {
+@media (max-width: 720px) {
   
     .center-container {
   margin-top: 5rem; 
@@ -185,6 +187,41 @@ body {
     top: 5%; /* slightly closer to top for smaller screens */
     gap: 2rem;
   }
+  .bio tbody {
+    display:block; 
+  }
+  .bio tr {
+    display: contents;
+  }
+  .bio td {
+    display: block;
+      width: 100%
+  }
+  .bio tr td + td {
+    order: 1;
+  
+}
+    
+    .about p {
+        padding-right: 4rem
+    }
+    .card{
+        width: 90.4%;
+        text-align: center;
+    }
+    .subcard tbody{display: flex;
+        width: 100%;
+    }
+    
+    .subcard td{
+        padding: 1rem;
+        width: 500%;
+        text-align: right;
+    }
+    .contact p, h2, h3 {
+        text-align: left;
+        padding-left: 0
+    }
+    
 
- 
 }
