@@ -195,18 +195,16 @@ body {
   }
   .bio td {
     display: block;
-      width: 100%
+      width: 86%
   }
   .bio tr td + td {
     order: 1;
   
 }
     
-    .about p {
-        padding-right: 4rem
-    }
-    .card{
-        width: 90.4%;
+    
+    .card td{
+        width: 100%;
         text-align: center;
     }
     .subcard tbody{display: flex;
@@ -215,7 +213,7 @@ body {
     
     .subcard td{
         padding: 1rem;
-        width: 500%;
+        width: 100%;
         text-align: right;
     }
     .contact p, h2, h3 {
