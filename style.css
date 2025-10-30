@@ -82,12 +82,8 @@ body {
 
     td {
       padding: 0.85rem 2rem;
-      border: 1px solid #ccc;
-      vertical-align: center;
-      border-right: 1px solid #aaa;
-      border-bottom :none;
-        border-left :none;
-        border-top :none;
+      
+      
 
     }
       p, h2, h3, h4 {
@@ -120,11 +116,13 @@ body {
       background-color: #F2F0EF;
       border-radius:.25rem;
       }
-      
+.indentText{
+    text-align: justify; margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
+}
     a{
         color:#aaaaaa;
         text-decoration:underline;
-        text-decoration-color: #67a682;
+        text-decoration-color: #9bc4ad;
         text-decoration-thickness:2.7px;
         font-size: .95rem;
         font-family: monospace;
@@ -139,7 +137,7 @@ body {
         font-size: .95rem;
         font-family: monospace;
           text-decoration:underline;
-        text-decoration-color: #67a682;
+        text-decoration-color: #9bc4ad;
         text-decoration-thickness:2.7px;
           text-underline-offset:3px;
             text-decoration-skip-ink: all;
@@ -159,7 +157,14 @@ body {
    MOBILE RESPONSIVENESS
    =========================== */
 @media (max-width: 768px) {
-  body {
+  
+    .center-container {
+  margin-top: 5rem; 
+}
+    .header-cover {
+  height: 5rem;
+}
+    body {
     padding: 0.1rem; /* reduce space around content on small screens */
   }
 
