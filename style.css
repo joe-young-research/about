@@ -1,0 +1,194 @@
+html, body { height: 100%; margin: 0; }
+      
+      
+/* Fixed-position top nav positioned visually like your screenshot */
+/* Ensure the entire area behind and above the nav is the same background */
+body {
+  background-color: #242424; /* already present in your code */
+  position: relative;
+  z-index: 0;
+    overflow-y:scroll;
+}
+
+/* Fixed nav stays on top */
+.center-container {
+  margin-top: 6rem; 
+}
+
+.header-cover {
+  position: fixed;
+  top: 0rem; 
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  background-color: #242424; 
+  z-index: 9998; 
+}
+
+.top-nav {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: transparent; 
+  width: auto;
+  z-index: 9999; 
+}
+
+
+
+
+.top-nav a {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #aaaaaa;
+  font-weight: bold;
+    width: 100%;
+}
+
+.top-nav a:hover {
+  color: #e8588f;
+}
+
+.top-nav .active {
+  color: #e8588f;
+}
+
+.center-container {
+  margin-top: 8rem; 
+}
+
+
+    body {
+  display: block;
+
+  padding: 1rem;      
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;;
+    background-color: #242424;
+}
+
+    table {
+      border-collapse: collapse;
+      text-align: left ;
+      font-size: 1.125rem;
+    width: 50%;
+        max-width: 1200px
+    }
+
+    td {
+      padding: 0.85rem 2rem;
+      border: 1px solid #ccc;
+      vertical-align: center;
+      border-right: 1px solid #aaa;
+      border-bottom :none;
+        border-left :none;
+        border-top :none;
+
+    }
+      p {
+          color: #F2F0EF
+      } 
+      
+      h2 {
+          color: #F2F0EF
+      }
+      
+      h3 {
+          color: #F2F0EF
+      }
+      
+      h4 {
+          color: #F2F0EF
+      }
+      
+      img{
+          border-radius:50%;
+          width: 60%;
+          max-width:150px
+      }
+    .center-container {
+      display: flex;
+      flex-direction: column; 
+      align-items: center;   
+      text-align: center;     
+      }
+ 
+    .bottom-text {
+      color: #e8588f;
+      position: absolute;
+      bottom: 1rem;
+      font-family: monospace;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      opacity: 1;
+      transition: opacity 2s ease; 
+      }
+      
+    a{
+        color:#aaaaaa;
+        text-decoration:underline;
+        text-decoration-color: #67a682;
+        text-decoration-thickness:2.7px;
+        font-size: .95rem;
+        font-family: monospace;
+    }
+    a:hover{
+        color:#e8588f;
+    }
+    
+      span{
+        color:#aaaaaa;
+        text-decoration:none;
+        font-size: .95rem;
+        font-family: monospace;
+          text-decoration:underline;
+        text-decoration-color: #67a682;
+        text-decoration-thickness:2.7px;
+          text-underline-offset:3px;
+            text-decoration-skip-ink: all;
+    }
+      
+    span:hover{
+        color:#e8588f;
+    }
+      
+
+
+     td:last-of-type {
+        border: none;
+    }
+      
+      /* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+  body {
+    padding: 0.1rem; /* reduce space around content on small screens */
+  }
+
+  table {
+      border-collapse: collapse;
+      text-align: left ;
+      font-size: 1.125rem;
+      width: 90%;
+        max-width: 1200px
+    }
+    img{
+          border-radius:50%;
+          width: 80%;
+          max-width:150px
+      }
+    
+    .top-nav {
+    top: 5%; /* slightly closer to top for smaller screens */
+    gap: 2rem;
+  }
+
+ 
+}
