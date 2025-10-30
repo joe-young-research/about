@@ -22,44 +22,16 @@
     <table >
         <tr><td colspan="2">
             <h4 style="text-align: left; margin-bottom: 1rem; margin-top: 5">Notes</h4>
-      <p style=" text-align: justify; margin: 0; ">Uh oh... Nothing here yet.
+      <p class = "indentText">Uh oh... Nothing here yet.
       </p></td></tr>
 
     </table>
-    
-      
+     
       
   </div>
 
   <div class="bottom-text"></div>
     
-    <script>
-  const emailSpan = document.querySelector("span");
-  const bottomText = document.querySelector(".bottom-text");
-  const originalText = bottomText.textContent;
-
-  emailSpan.addEventListener("click", () => {
-    const emailText = emailSpan.textContent;
-
-    navigator.clipboard.writeText(emailText)
-      .then(() => {
-        bottomText.textContent = "Email copied to clipboard!";
-        bottomText.style.opacity = 1; // make sure it's visible
-
-        // Fade out after 1 second
-        setTimeout(() => {
-          bottomText.style.opacity = 0;
-        }, 1000);
-
-        // Optional: reset text and opacity after fade completes
-        setTimeout(() => {
-          bottomText.textContent = originalText;
-          bottomText.style.opacity = 1;
-        }, 2000); // 1s fade + 1s buffer
-      })
-      .catch(err => console.error("Failed to copy email!"));
-  });
-</script>
 
 </body>
 
