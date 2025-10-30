@@ -15,7 +15,7 @@
       <div class="header-cover"></div>
 <nav class="top-nav">
   <a href="index.html" class="active" >About</a>
-  <a href="notes.html" >Notes</a>
+  <a href="notes.html">Notes</a>
 </nav>
 
 
@@ -55,6 +55,7 @@
       .then(() => {
         bottomText.textContent = "Email copied to clipboard!";
         bottomText.style.opacity = 1; // make sure it's visible
+        bottomText.style.padding = "5px";
 
         // Fade out after 1 second
         setTimeout(() => {
@@ -65,6 +66,7 @@
         setTimeout(() => {
           bottomText.textContent = originalText;
           bottomText.style.opacity = 1;
+            bottomText.style.padding = "0px";
         }, 2000); // 1s fade + 1s buffer
       })
       .catch(err => console.error("Failed to copy email!"));
