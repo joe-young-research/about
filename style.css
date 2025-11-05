@@ -116,14 +116,14 @@ body {
       }
     
     .indentText{
-    text-align: justify; margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
+    t margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
     }
     a{
-        color:#aaaaaa;
+        color:#5c5c5c;
         text-decoration:underline;
         text-decoration-color: #9bc4ad;
         text-decoration-thickness:2.7px;
-        font-size: .95rem;
+        
         font-family: monospace;
     }
     a:hover{
@@ -131,7 +131,7 @@ body {
     }
     
       span{
-        color:#aaaaaa;
+        color:#5c5c5c;
         text-decoration:none;
         font-size: .95rem;
         font-family: monospace;
