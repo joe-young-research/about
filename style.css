@@ -86,9 +86,24 @@ body {
       p, h2, h3, h4 {
           color: #242424
       } 
+    
+
+.date{
+    color:#949494;
+    font-family: monospace;
+    font-weight: normal;
+    margin-top: 0.1rem
+}
       
-      
-      img{
+.noteHead{
+    margin-bottom: 0rem;
+}
+.math {
+  display: block;          /* puts it on its own line */
+  text-align: center;      /* centers the equation */
+  margin: 0.75rem 0;       /* space above and below */
+}
+      .pfp{
           border-radius:50%;
           width: 90%;
           max-width:150px
@@ -116,9 +131,10 @@ body {
       }
     
     .indentText{
-    t margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
+     margin: 0; border-left: 3px solid #9bc4ad; padding-left: 1rem
     }
     a{
+        font-size: .95rem;
         color:#5c5c5c;
         text-decoration:underline;
         text-decoration-color: #9bc4ad;
@@ -177,7 +193,7 @@ body {
       width: 90%;
         max-width: 1200px
     }
-    img{
+    .pfp{
           border-radius:50%;
           width: 80%;
           max-width:150px
