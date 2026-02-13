@@ -190,7 +190,7 @@ body {
       border-collapse: collapse;
       text-align: left ;
       font-size: 1.125rem;
-      width: 90%;
+      width: 100%;
         max-width: 1200px
     }
     .pfp{
@@ -234,7 +234,7 @@ body {
     }
     .contact p, h2, h3 {
         text-align: left;
-        padding-left: 0
+        padding: 0
     }
     
 
