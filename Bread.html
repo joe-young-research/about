@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bread</title>
+    <link rel="icon" href="Tab.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+</head>
+<body>
+  <div class="center-container">
+
+      <div class="header-cover"></div>
+<nav class="top-nav">
+  <a href="index.html" >About</a>
+  <a href="notes.html" >Notes</a>
+</nav>
+
+    <table>
+        <tr><td colspan="2">
+            
+            <h4  style="text-align: left; margin-bottom: 1rem; margin-top: 5">Should I Buy a Bread Machine? A Monte Carlo Simulation</h4>
+            <h5  style="text-align: left; margin-bottom: 1rem; margin-top: 5">1. Introduction</h5>
+            <p class = "bodyText"> Recently, I stumbled on <a href = "https://youtu.be/_K_qWWMNe3E">this video</a> which uses a break-even analysis as a vehicle to talk about coding defensively, particularly when you are piecing together chunks of code from LLMs. In this video, some interesting points came up about modeling uncertainty and I thought I would try to replicate the analysis using a Monte Carlo simulation.<br><br>
+                
+            The basic premise of this break-even analysis is that you expect to consume some number of loaves of bread per week. Going to the store to buy that bread comes with some cost which will continue to accumulate over time as you buy bread. If, however, you were to buy a bread machine, although you have some upfront cost, you only need to pay for the ingredients thereafter and you should therefore reach some point in the future where you end up saving money. <br><br>
+            
+            Early on in this video however, the author said something about modeling the number of loaves they consume per week which stuck out to me:
+            </p>
+            <br>
+            <p class = "indentText" style="font-style: italic; margin-right: 2rem; color: #787877; font-weight: lighter; font-size: 1rem; ">There needs to be some uncertainty  \( \; [\cdots] \; \)  and what I wanted to do was to model that as a uniform distribution.</p>
+            <br>
+            <p class = "bodyText">Well, I took issue with this.<br><br>
+            A uniform distribution is defined by a probability density which is even between some lower and upper bounds. It seems to me however, that this is not true for the amount of bread you consume in a week, but that instead the amount of bread you consume per week would be normally distributed, where there is some probability mass around your expected value of loaves per week, and the probability mass tapers to zero as you move above or below that expected value. This of course assumes that loaves can exist as continuous values rather than discrete integers, and being that loaves are sliced and eaten in parts, again this seems like a reasonable representation to me. 
+            
+            </p>
+            
+            <h5  style="text-align: left; margin-bottom: 1rem; margin-top: 5">2. Defining Our Parameters</h5>
+            
+            <p class = "bodyText">There are a few key values I am interested in here. These include:<br></p>
+                <ol  style="padding-left: 50px">
+                    <li>Cost of a loaf (\(C_l\))</li>
+                    <li>Cost of a bread machine(\(C_m\))</li>
+                    <li>Cost of ingredients (\(C_g\))</li>
+                    <li>Expected rate of inflation (\(\pi_e\))</li>
+                    <li>Rate of consumption (\(\pi_c\))</li>
+            
+            </ol>
+            <p class = "bodyText">Of these values, the only one without uncertainty for our purposes is the cost of the bread machine, as this is a fixed price which we know. I have been looking at Cuisinart's Bread Maker, so I will assume
+                
+                <span class = math>\(C_m = 169.95.\)</span>  
+                
+            Next, I know that I eat roughly one loaf per week with some regularity, and I estimate a standard deviation of about half a loaf so I will define the rate of consumption by mean and standard deviation
+        
+                <span class = "math">\(\pi_c \sim \mathcal{N}\left( 1, 0.25\right).\)</span>
+            
+            From this point however, things begin to get a bit tricky. Most the other values I have left will occur over time and are therefore depend on the rate of inflation. Drawing from Trading Economics’ <a href = "https://tradingeconomics.com/united-states/food-inflation">food inflation data</a>, weekly inflaction can be described as
+                
+            <span class = 'math'>\( \pi_e \sim \mathcal{N}\left( 5.6 \times 10^{-4}, 3.24 \times 10^{-5}\right).\)</span>
+                
+            Then, assuming that the cost of a loaf of bread varies with coupons, sales, or more stochastic price fluctuations, the cost of a loaf can be described by
+                
+                <span class = "math">\( C_l \sim \mathcal{N}\left( 6, 0.025 \right).  \)</span>
+                                
+            Lastly, we will need to define the cost of our ingredients. I will be using this recipe:<br>
+
+            </p>
+            
+            <p class = "indentText" style="font-style: italic; margin-left: 1rem; margin-right: 2rem; color: #787877; font-weight: lighter; font-size: 1rem; ">
+                2 1/2 cups of water <br>
+                1 Tbsp sugar <br>
+                6 1/2 cups all-purpose flour<br>
+                2 tsp salt<br>
+                1/4 cup butter<br>
+               \([\cdots] \)
+            </p>
+            
+            <p class = "bodyText">Working out how much this would all cost per loaf I am left with
+            
+            <span class = 'math'>\( C_g \sim \mathcal{N}\left( 2.18, 0.1 \right). \)</span></p>
+            
+            <h5  style="text-align: left; margin-bottom: 1rem; margin-top: 5">3. Simulation Strategy</h5>
+            
+            <p class = "bodyText">Monte carlo simulation uses the law of large numbers to identify a probability distribution which describes the outcome of uncertain events. To do this, random draws are made from a set of probability distributions, to provide values which are then used in analysis. When this is carried out many times over, a posterior density distribution is generated which approximates (in our case) a normal distribution, allowing us to calculate an expected value, as well as the uncertainty around it.<br><br>
+            
+            Imagine for example we have two values, \(\beta.1\) and \(\beta.2\) drawn randomly from distributions:
+            
+            <span class = 'math'>\(\beta.1 \sim \mathcal{N}\left( 5,7 \right) \) </span>
+            <span class = 'math'>\(\beta.2 \sim \mathcal{N}\left( -10,5 \right). \) </span>
+            
+                We then compute some value
+                
+                            <span class = 'math'>\( \beta.1 \div \beta.2, \) </span>
+                
+                and examine the posterior distribution:
+
+            </p>
+            
+            <img style="width: 80%; display: block; margin: 0 auto;" src = "Bread/product_normals.gif">
+            <br>
+            <p class = "bodyText">Similarly, using the distributions laid out above, we can make a series of draws, and calculate break even points for each set of randomly selected parameters. To do this, for a given draw \(i\), we will calculate the amount that would be spent on loaves of bread (\(S_b\)) in week \(j\) accounting for inflation
+            
+            <span class = 'math'>\(  S_{b,ij} =  C_l  \pi_c \frac{\left(1+\pi_e\right)^j-1}{\pi_e},\)</span>
+            
+            and the total amount that would be spent on ingredients (\(S_g\)) for a given draw \(i\) in week \(j\), again accounting for inflation
+                
+                <span class = 'math'>\(  S_{g,ij} = C_g  \pi_c \frac{\left(1+\pi_e\right)^j-1}{\pi_e} \)</span>
+                
+                
+
+            
+            Savings (\(\Delta\)) for week \(j\) can then be calculated by subtraction
+            
+            <span class = 'math'>\(  \Delta_{ij} = S_{b,ij} - \left(S_{g,ij}+ C_m\right).\)</span>
+            
+            By continuing this operation, calculating savings to some reasonable upper bound of weeks for every set of draws, we can then produce a matrix
+                
+                <span class = 'math'>
+                
+                    \(\begin{bmatrix}
+                    \Delta_{i_1j_1}&\Delta_{i_1j_2}&\Delta_{i_1j_3}& \cdots&\Delta_{i_1j_k}\\
+                    \Delta_{i_2j_1}&\Delta_{i_2j_2}&\Delta_{i_2j_3}& \cdots &\Delta_{i_2j_k}\\
+                    \Delta_{i_3j_1}&\Delta_{i_3j_2}&\Delta_{i_3j_3}& \cdots&\Delta_{i_3j_k}\\
+                    \vdots&\vdots&\vdots&\ddots&\vdots\\
+                    \Delta_{i_nj_1}&\Delta_{i_nj_2}&\Delta_{i_nj_3}& \cdots &\Delta_{i_nj_k}\\
+                    \end{bmatrix}
+                
+                \)
+                
+                </span>
+                <br>
+            All that is left then is to identify for which week of each draw \(\Delta \) flips from positive to negative, giving the week where I start saving money. Then we can examine the posterior distribution of weeks to identify the expected week for breaking even, and the confidence interval around that value. 
+            </p>
+            
+            <h5  style="text-align: left; margin-bottom: 1rem; margin-top: 5">4. Results</h5>
+            
+            <img style="width: 100%; display: block; margin: 0 auto;" src = "Bread/carlo.gif">
+            
+            <p class = "bodyText">Overall, this implementation worked pretty well. Allowing this monte carlo simulation to run for 5000 iterations provides us with a break-even week of 99, indicating that it would take nearly 2 years to begin saving money by making bread rather than buying it from the store. What is particularly interesting to me about this method of problem solving is how quickly we narrow in on a reasonable answer. Within the first 100 draws, we already have a mean break-even week of 102. By adding in additional draws, what really begins to grow is capturing more of the upper extreme range of the distribution, being that those values are less probable, and therefore generally only emerge with a very large number of draws. I think it should also be clear that this simulation uses relatively few parameters for the fundamental cost analysis it performs, and the distributions which characterize those parameters are fairly narrow. For some more complicated system, perhaps with more interacting variables or more uncertainty, it may take much longer to converge on a reasonable answer.<br><br>
+            
+            What is important however, is whether or not we actually gained anything by using a normal distribution rather than a uniform one. 
+
+            </p>
+            <img style="width: 70%; display: block; margin: 0 auto;" src = "Bread/Post.png">
+            <p class = "bodyText">When comparing these distributions, what really sticks out to me is how similar they really do appear. What does appear however, aligns well with the initial thesis of what stuck out about using a uniform distribution, that is, that a uniform distribution provides significantly greater probability mass to high and low values than the 'expected' values which fall in the middle. As such, when we examine the posterior distribution, there is a bit more mass distributed to the higher range of values than is achieved by the uniform distribution. This in turn reduces the confidence in the estimate of expected break-even week as is apparent when examining the quantiles of the posterior distributions:
+            </p>
+            
+            <table style = " width: 50%; margin: 0 auto; ">
+            <tr style = "border-bottom: 2px solid black;">
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>Distribution</p></td>
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>2.5%</p></td>
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>25%</p></td>
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>50%</p></td>
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>75%</p></td>
+                <td style="text-align: center; padding: .4rem; padding-bottom: 0"><p>97.5%</p></td>
+
+                </tr>
+                <tr>
+                <td style="text-align: center; padding: 0; margin: 0"><p>Normal</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>57</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>77</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>93</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>114</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>186</p></td>
+                </tr>
+                <tr>
+                <td style="text-align: center; padding: 0; margin: 0"><p>Normal</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>55</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>75</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>96</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>128</p></td>
+                <td style="text-align: center; padding: 0; margin: 0"><p>195</p></td>
+                </tr>
+            
+            </table>
+            
+            <p class = "bodyText">So, did it matter that we used a normal distribution? Well, not really.<br><br>But I do think this was a useful exercise regardless to explore monte carlo simulation, and to think through how basic assumptions can have unexpected impacts on your results. </p><br><br><br><br>
+
+            </td></tr>
+
+
+    </table>
+     
+      
+  </div>
+
+  <div class="bottom-text"></div>
+    
+
+</body>
+
+</html>

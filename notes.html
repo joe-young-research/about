@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Notes</title>
+    <link rel="icon" href="Tab.png">
+    <link rel="stylesheet" href="style.css">
+    
+    
+</head>
+<body>
+  <div class="center-container">
+
+      <div class="header-cover"></div>
+<nav class="top-nav">
+  <a href="index.html" >About</a>
+  <a href="notes.html" class="active">Notes</a>
+</nav>
+
+    <table style = "width : 100%;border-collapse: collapse;">
+        <tr><td colspan="2">
+            
+            <table style = "width: 100%; " >
+                
+            <tr class="clickable-row" data-href = "Bread.html">
+        
+                <td  style =" padding: 0; padding-bottom: 12px; margin: 0px; padding-right: 10px "> <a href = "Bread.html">Should I Buy a Bread Machine? A Monte Carlo Simulation</a></td>
+                <td style = " text-align: left; margin: 0;padding: 0; vertical-align: top; "><h5 class = "date">2026.03.11</h5></td>
+                
+            </tr>
+                
+             <tr class="clickable-row" data-href = "OUApples.html">
+                 <td style ="width: 85%;padding: 0; padding-bottom: 12px; margin: 0px; padding-right: 10px "> <a href = "OUApples.html">An Archaeological Exercise in Tree Age Estimation</a></td>
+                 <td style = "text-align: right; margin: 0;padding: 0;"><h5 class = "date">2025.11.19</h5></td>
+                
+                
+            </tr>
+             <tr class="clickable-row" data-href = "https://joe-young-research.github.io/about/rJagsNotes.html">
+                 
+                <td style ="width: 85%;padding: 0; padding-bottom: 8px; margin: 0px; padding-right: 10px "> <a href = "https://joe-young-research.github.io/about/rJagsNotes.html">Intro to rJAGS</a></td>
+                 <td style = "text-align: right; margin: 0;padding: 0;"><h5 class = "date">2024.11.18</h5></td>
+                
+            </tr>
+                
+            </table>
+                               
+            </td></tr>
+
+    </table>
+     
+      
+  </div>
+
+  <div class="bottom-text"></div>
+    
+<script>document.querySelectorAll("tr[data-href]").forEach(row => {
+  row.addEventListener("click", () => {
+    window.location = row.dataset.href;
+  });
+});</script>
+</body>
+
+</html>
